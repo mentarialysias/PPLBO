@@ -18,7 +18,7 @@ public class PostMapper implements RowMapper<Post> {
         post.setTitle(rs.getString("title"));
         post.setContent(rs.getString("content"));
         post.setRegDate(rs.getDate("reg_date"));
-        post.setUpdDate(rs.getDate("updt_date"));
+        post.setupdtDate(rs.getDate("updt_date"));
 
         return post;
     }

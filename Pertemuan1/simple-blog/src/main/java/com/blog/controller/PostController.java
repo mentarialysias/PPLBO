@@ -11,9 +11,12 @@ import com.blog.vo.Post;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @RestController
 public class PostController {
-
+    private static final Logger log = LoggerFactory.getLogger(PostController.class);
     @Autowired
     PostService postService;
 
@@ -69,6 +72,33 @@ public class PostController {
         } else {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return new Result (500, "Fail");
+        }
+    }
+
+    @DeleteMapping("/post")
+    public Object deletePost(HttpServletResponse response, @RequestParam("id") Long id) {
+        boolean isSuccess = postService.deletePost(id);
+
+        log.info("id ::: " + id);
+
+        if(isSuccess){
+            return new Result(200, "Success");
+        } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return new Result(500, "Fail");
+        }
+    }
+
+    @PutMapping("/post")
+    public Object modifyPost(HttpServletResponse response, @RequestBody Post postParam) {
+        Post post = new Post(postParam.getId(), postParam.getTitle(), postParam.getContent());
+        boolean isSuccess = postService.updatePost(post);
+
+        if(isSuccess) {
+            return new Result(200, "Success");
+        } else {
+            response.setStatus((HttpServletResponse.SC_INTERNAL_SERVER_ERROR));
+            return new Result(500, "Fail");
         }
     }
 

@@ -25,8 +25,8 @@ public class Post {
     @Column(name="regDate")
     private Date regDate;
 
-    @Column(name="updDate")
-    private Date updDate;
+    @Column(name="updtDate")
+    private Date updtDate;
 
     public Post() {
 
@@ -39,7 +39,7 @@ public class Post {
         this.title = title;
         this.content = content;
         this.regDate = new Date();
-        this.updDate = new Date();
+        this.updtDate = new Date();
     }
 
     public Post(String user, String title, String content) {
@@ -47,9 +47,15 @@ public class Post {
         this.title = title;
         this.content = content;
         this.regDate = new Date();
-        this.updDate = new Date();
+        this.updtDate = new Date();
     }
 
+    public Post(Long id, String title, String content){
+        super();
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
     public long getId(){
         return id;
     }
@@ -90,12 +96,12 @@ public class Post {
         this.regDate = regDate;
     }
 
-    public Date getUpdDate() {
-        return updDate;
+    public Date getupdtDate() {
+        return updtDate;
     }
 
-    public void setUpdDate(Date updDate){
-        this.updDate = updDate;
+    public void setupdtDate(Date updtDate){
+        this.updtDate = updtDate;
     }
 
 }
